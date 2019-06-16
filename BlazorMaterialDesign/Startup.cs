@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazorMaterialDesign.Data;
+using EmbeddedBlazorContent;
+using System.Net.Http;
 
 namespace BlazorMaterialDesign
 {
@@ -27,6 +29,7 @@ namespace BlazorMaterialDesign
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<HttpClient>();
             services.AddSingleton<WeatherForecastService>();
         }
 
@@ -48,6 +51,8 @@ namespace BlazorMaterialDesign
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseEmbeddedBlazorContent(typeof(MatBlazor.BaseMatComponent).Assembly);
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,5 +1,67 @@
 ﻿@page "/"
+    <br />
 
-<h1>Hello, world!</h1>
+@*Tables*@
+<MatTable Items="@posts"
+            LoadInitialData="true"
+            Striped="true"
+            RequestApiOnlyOnce="true"
+            ApiUrl="https://jsonplaceholder.typicode.com/posts"
+            FilterByColumnName="title"
+            DebounceMilliseconds="150">
+    <MatTableHeader>
+        <th>User Id</th>
+        <th>Title</th>
+        <th>Body</th>
+    </MatTableHeader>
+    <MatTableRow>
+        <td>@context.userId</td>
+        <td>@context.title</td>
+        <td>@context.body</td>
+    </MatTableRow>
+</MatTable>
+<br />
+@*Text Field*@
+<MatTextField Label="Post Title" FullWidth="true"></MatTextField><br />
+<MatTextField Label="Body" TextArea="true" FullWidth="true"></MatTextField><br />
+@* Auto Complete *@
+<MatAutocomplete Collection="@options" ItemType="Category" 
+                 Label="Select Category"
+                 CustomStringSelector="@(i => i.Name)"
+                 Value="@value">
+    <ItemTemplate>
+        <div style="display:flex; flex-direction: row; width: 100%">
+            <div style="flex: 1">@context.Name</div>
+        </div>
+    </ItemTemplate>
+</MatAutocomplete>
+<p>Selected Value : @(value?.Name)</p>
+<MatButton Outlined="true">Send Post</MatButton>
+<br />
+@functions {
+    public class Posts
+    {
+        public int userId { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public string body { get; set; }
+    }
+    Posts[] posts;
 
-Welcome to your new app.
+    public class Category
+    {
+        public string Name { get; set; }
+        public Category(string name)
+        {
+            Name = name;
+        }
+    }
+
+    Category value = null;
+    Category[] options = new[]
+    {
+        new Category("Mobile App Development"),
+        new Category("Web App Development"),
+        new Category("SEO & Digital Marketing")
+    };
+}

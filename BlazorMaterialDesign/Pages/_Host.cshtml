@@ -1,7 +1,7 @@
-@page "/"
+﻿@page "/"
 @namespace BlazorMaterialDesign.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+@using EmbeddedBlazorContent
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BlazorMaterialDesign</title>
     <base href="~/" />
+    @Html.EmbeddedBlazorContent()
     <environment include="Development">
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     </environment>
@@ -17,7 +18,7 @@
               asp-fallback-href="css/bootstrap/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link href="css/site.css" rel="stylesheet" />
 </head>
